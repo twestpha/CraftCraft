@@ -6,7 +6,7 @@ public class PickupComponent : MonoBehaviour {
     public const float MAX_RAYCAST_DISTANCE = 20.0f;
     public const int TILE_COLLISION_MASK = 1 << 9;
 
-    public const float TILE_RAISE_HEIGHT = 1.5f;
+    public const float TILE_RAISE_HEIGHT = 0.7f;
     public const float TILE_SEEK_TIME = 0.15f;
 
     private Plane groundplane;
