@@ -280,6 +280,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  resetButtonIcon: {fileID: 1813292394}
+  requirementIcons:
+  - {fileID: 1599448807}
+  - {fileID: 1863747348}
+  - {fileID: 1381388519}
+  - {fileID: 991467309}
+  - {fileID: 1346568814}
+  requirementSprites:
+  - {fileID: 21300000, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300002, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300004, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300006, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300008, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300010, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
+  - {fileID: 21300012, guid: a167ad6e7b3b821429ba95eedc5c3cba, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2720,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813292394}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -2867,36 +2882,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: []
---- !u!1 &1952394321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1952394322}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1952394322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952394321}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.332, y: 2.439, z: 0.094}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982847278
 GameObject:
   m_ObjectHideFlags: 0
