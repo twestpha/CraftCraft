@@ -13,9 +13,12 @@ public class PickupComponent : MonoBehaviour {
     private GameObject heldTile;
 
     private Vector3 tileVelocity;
+    private Timer rotationTimer;
+    private Quaternion originalRotation;
 
 	void Start(){
         groundplane = new Plane(Vector3.down /* wtf plane normals */, TILE_RAISE_HEIGHT);
+        rotationTimer = new Timer(TILE_SEEK_TIME);
 	}
 
 	void Update(){
@@ -27,6 +30,8 @@ public class PickupComponent : MonoBehaviour {
                 heldTile = hit.collider.gameObject;
 
                 heldTile.GetComponent<Rigidbody>().isKinematic = true;
+                rotationTimer.Start();
+                originalRotation = heldTile.transform.rotation;
             }
         }
 
@@ -45,6 +50,10 @@ public class PickupComponent : MonoBehaviour {
                 ref tileVelocity,
                 TILE_SEEK_TIME
             );
+
+            if(!rotationTimer.Finished()){
+                heldTile.transform.rotation = Quaternion.Lerp(originalRotation, Quaternion.Euler(-90.0f, 0.0f, 0.0f), rotationTimer.Parameterized());
+            }
         }
 
         if(Input.GetMouseButtonUp(0) && heldTile){
