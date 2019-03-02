@@ -37,19 +37,21 @@ public class TileCombinerComponent : MonoBehaviour {
 
     public Vector3[] tileSpawnBox;
 
+    public Recipe[] recipes;
+
     private int levelIndex;
     public LevelData[] levels;
 
     private Combiner combiner;
 
     void Start(){
-        combiner = new Combiner();
-
         levelIndex = 0;
         SetupCurrentLevel();
 
         if(tilePrefabs.Length != (int) TileType.Count){ Debug.LogError("TilePrefabs is wrong length"); }
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
+
+        combiner = new Combiner(recipes);
     }
 
     void Update(){
