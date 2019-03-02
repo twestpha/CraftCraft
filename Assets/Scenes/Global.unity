@@ -277,7 +277,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 13f2085ae572e6549be7872f390eebd8, type: 2}
   - {fileID: 11400000, guid: 0721461c5ef6d4a2da9f46ecbb2f8fb7, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6db07897765811141aabd6e27abdcaa7, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   resetButtonIcon: {fileID: 1813292394}
