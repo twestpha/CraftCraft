@@ -32,6 +32,9 @@ public class TileComponent : MonoBehaviour {
     }
 
     public void DestroyTile(){
-        // play effects and hide model, then delete gameObject poof!
+        GameObject spawnedfx = GameObject.Instantiate(data.destructionPrefab);
+        spawnedfx.transform.position = transform.position;
+
+        Destroy(gameObject);
     }
 }

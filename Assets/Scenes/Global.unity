@@ -265,10 +265,10 @@ MonoBehaviour:
   - {fileID: 1869655022}
   - {fileID: 833813102}
   tileSpawnBox:
-  - {x: 1.803, y: 0, z: 1.276}
-  - {x: -1.332, y: 0, z: 0.094}
+  - {x: 1.29, y: 0, z: 0.76}
+  - {x: -0.85, y: 0, z: 0.35}
   levels:
-  - {fileID: 11400000, guid: 74f3d18f370fbad468511e2790ec695b, type: 2}
+  - {fileID: 11400000, guid: 13f2085ae572e6549be7872f390eebd8, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

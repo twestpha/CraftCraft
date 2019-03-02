@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43706435, g: 0.48477095, b: 0.5650341, a: 1}
+  m_IndirectSpecularColor: {r: 0.43706462, g: 0.4847713, b: 0.56503445, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -333,7 +333,9 @@ MonoBehaviour:
   - {fileID: 1869655022}
   - {fileID: 833813102}
   - {fileID: 819659251}
-  newTileSpawnPoint: {x: 0.3, y: 1, z: 1.1}
+  tileSpawnBox:
+  - {x: 1.3, y: 0, z: 0.76}
+  - {x: -0.86, y: 0, z: 0.35}
   levels: []
 --- !u!1 &170076733
 GameObject:

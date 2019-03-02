@@ -25,14 +25,6 @@ public enum Detector {
     Count,
 }
 
-[CreateAssetMenu(fileName = "leveldata", menuName = "Level Data", order = 2)]
-public class LevelData : ScriptableObject {
-    public TileType[] tilesToSpawn;
-    public TileType[] tilesToComplete;
-}
-
-
-
 public class TileCombinerComponent : MonoBehaviour {
     // CHRIS: This is where we'll put the logic for how to combine tiles
     // We'll have triggers for which two tiles (more than two?) are in the correct slots
@@ -48,7 +40,11 @@ public class TileCombinerComponent : MonoBehaviour {
     private int levelIndex;
     public LevelData[] levels;
 
+    private Combiner combiner;
+
     void Start(){
+        combiner = new Combiner();
+
         levelIndex = 0;
         SetupCurrentLevel();
 
@@ -77,7 +73,7 @@ public class TileCombinerComponent : MonoBehaviour {
             };
         }
 
-        CombinerResult result = new Combiner().CombineTiles(
+        CombinerResult result = combiner.CombineTiles(
             leftTiles,
             rightTiles,
             suppliedEnergy
@@ -116,16 +112,16 @@ public class TileCombinerComponent : MonoBehaviour {
     }
 
     void SetupCurrentLevel(){
+        if(levels == null || levels.Length == 0 || levels[levelIndex] == null){ return; } // what the fuck?
+
         TileType[] toSpawn = levels[levelIndex].tilesToSpawn;
 
         for(int i = 0; i < toSpawn.Length; ++i){
-            Debug.Log(toSpawn[i]);
-
             Instantiate(
                 tilePrefabs[(int) toSpawn[i]],
                 new Vector3(
                     Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).x,
-                    2.4f,
+                    1.0f + (3.0f * Random.value),
                     Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).z
                 ),
                 Quaternion.Euler(-90.0f, 0.0f, 0.0f)

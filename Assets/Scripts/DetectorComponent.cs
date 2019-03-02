@@ -30,7 +30,11 @@ public class DetectorComponent : MonoBehaviour {
 
     public void DestroyAllTiles() {
         for (int i = 0; i < tiles.Length; i++) {
-            Destroy(tiles[i]);
+            if(tiles[i]){
+                TileComponent tile = tiles[i].GetComponent<TileComponent>();
+                if(tile){ tile.DestroyTile(); }
+            }
+
             tiles[i] = null;
         }
     }
