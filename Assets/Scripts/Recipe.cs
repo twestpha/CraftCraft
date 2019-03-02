@@ -17,6 +17,7 @@ public class Recipe : ScriptableObject {
         var leftTilesArr = leftTiles.ToArray();
         var rightTilesArr = rightTiles.ToArray();
 
+        // not very efficient, but recipes aren't that big so ¯\_(ツ)_/¯
         bool match = TilesComparer.TilesMatch(leftTilesArr, aTiles) && TilesComparer.TilesMatch(rightTilesArr, bTiles);
         match = match || TilesComparer.TilesMatch(rightTilesArr, aTiles) && TilesComparer.TilesMatch(leftTilesArr, bTiles);
         return match;
