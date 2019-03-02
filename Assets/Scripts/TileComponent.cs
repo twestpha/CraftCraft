@@ -30,6 +30,13 @@ public class TileComponent : MonoBehaviour {
             GameObject spawnedfx = GameObject.Instantiate(data.collisionEffectsPrefab);
             spawnedfx.transform.position = spawnPosition;
         }
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.volume = coll.impulse.magnitude * 3.0f;
+        source.Stop();
+        source.clip = data.collisionSound;
+        source.pitch = 0.6f + (Random.value * 0.8f);
+        source.Play();
     }
 
     public void DestroyTile(bool didwin){

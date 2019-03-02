@@ -45,8 +45,10 @@ public class TileCombinerComponent : MonoBehaviour {
     private Combiner combiner;
     private Timer winCheckTimer;
     private Timer setupNewLevelTimer;
+    private Timer recipeCheckTimer;
     private float secondsBeforeWinCheck = 3.5f;
     private float newLevelDelay = 0.5f;
+    private float recipeCheckDelay = 0.6f;
 
     void Start(){
         levelIndex = 0;
@@ -56,34 +58,46 @@ public class TileCombinerComponent : MonoBehaviour {
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
 
         combiner = new Combiner(recipes);
+
+        // So the recipe doesn't feel so "sudden" after it's submitted
+        recipeCheckTimer = new Timer(recipeCheckDelay);
+        recipeCheckTimer.Start();
     }
 
     void Update(){
         // Build state of the board
-        List<TileType> leftTiles = new List<TileType>();
-        List<TileType> rightTiles = new List<TileType>();
-        int suppliedEnergy = 0;
 
-        for(int i = 0; i < (int) Detector.Count; ++i){
-            DetectorComponent d = detectors[i].GetComponent<DetectorComponent>();
-            switch ((Detector)i) {
-            case Detector.Center:
-                suppliedEnergy = d.getNumEnergyTiles();
-                break;
-            case Detector.Left:
-                leftTiles = d.getAllValidTiles();
-                break;
-            case Detector.Right:
-                rightTiles = d.getAllValidTiles();
-                break;
-            };
+        CombinerResult result = new CombinerResult();
+        result.Success = false;
+
+        if(recipeCheckTimer.Finished()){
+            recipeCheckTimer.Start();
+
+            List<TileType> leftTiles = new List<TileType>();
+            List<TileType> rightTiles = new List<TileType>();
+            int suppliedEnergy = 0;
+
+            for(int i = 0; i < (int) Detector.Count; ++i){
+                DetectorComponent d = detectors[i].GetComponent<DetectorComponent>();
+                switch ((Detector)i) {
+                case Detector.Center:
+                    suppliedEnergy = d.getNumEnergyTiles();
+                    break;
+                case Detector.Left:
+                    leftTiles = d.getAllValidTiles();
+                    break;
+                case Detector.Right:
+                    rightTiles = d.getAllValidTiles();
+                    break;
+                };
+            }
+
+            result = combiner.CombineTiles(
+                leftTiles,
+                rightTiles,
+                suppliedEnergy
+            );
         }
-
-        CombinerResult result = combiner.CombineTiles(
-            leftTiles,
-            rightTiles,
-            suppliedEnergy
-        );
 
         if (result.Success) {
             // Old tiles are destroyed - ooh, ahh, effects
