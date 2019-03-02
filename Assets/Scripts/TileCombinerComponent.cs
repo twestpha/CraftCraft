@@ -22,6 +22,12 @@ public enum Detector {
     Count,
 }
 
+[CreateAssetMenu(fileName = "leveldata", menuName = "Level Data", order = 2)]
+public class LevelData : ScriptableObject {
+    public TileType[] tilesToSpawn;
+    public TileType[] tilesToComplete;
+}
+
 public class TileCombinerComponent : MonoBehaviour {
     // CHRIS: This is where we'll put the logic for how to combine tiles
     // We'll have triggers for which two tiles (more than two?) are in the correct slots
@@ -32,7 +38,13 @@ public class TileCombinerComponent : MonoBehaviour {
 
     public GameObject[] detectors;
 
+    private int levelIndex;
+    public LevelData[] levels;
+
     void Start(){
+        levelIndex = 0;
+        // setup first level?
+
         if(tilePrefabs.Length != (int) TileType.Count){ Debug.LogError("TilePrefabs is wrong length"); }
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
     }
@@ -41,7 +53,9 @@ public class TileCombinerComponent : MonoBehaviour {
         // If either one of the detectors contains a tile AND the energy detector has an energy ball, do the combination
         // Energy is the *sorta* the go button, then, right? I'm kind of ok with that
         for(int i = 0; i < (int) Detector.Count; ++i){
-            // Many to Many? One to One?
+            // How are we going to handle complex recipe matching?
+            // i.e. square square square + triangle + energy ball = something
+            // or is it always 1 shape + 1 shape + energy = something
 
             // Old tiles are destroyed - ooh, ahh, effects
             // New tile is instantiated according to CombineTiles, and dropped into the scene

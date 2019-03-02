@@ -1278,6 +1278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
 --- !u!1 &743934668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,6 +2154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
 --- !u!1 &1982847278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,6 +2366,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114050683736050324, guid: d7c265a7d1425594ab23aa545adb3b89,
+        type: 2}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7c265a7d1425594ab23aa545adb3b89, type: 2}
   m_IsPrefabAsset: 0
