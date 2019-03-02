@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2545816934182733188}
   - component: {fileID: 2545816934182733191}
   - component: {fileID: 2545816934182733189}
+  - component: {fileID: 7442440939393055118}
   m_Layer: 9
   m_Name: Rectangle Tile
   m_TagString: Untagged
@@ -123,3 +124,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
+--- !u!114 &7442440939393055118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2545816934182733187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72979a72a62964758b39a514443c4a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeSpeedRange: {x: 60, y: 80}
+  shakeAmount: 0.005

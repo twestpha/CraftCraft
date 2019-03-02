@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8720844323183124842}
   - component: {fileID: 8720844323183124841}
   - component: {fileID: 8720844323183124840}
+  - component: {fileID: 3867138843584685178}
   m_Layer: 9
   m_Name: Circle Tile
   m_TagString: Untagged
@@ -124,3 +125,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
+--- !u!114 &3867138843584685178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8720844323183124846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72979a72a62964758b39a514443c4a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeSpeedRange: {x: 60, y: 80}
+  shakeAmount: 0.005
