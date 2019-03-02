@@ -40,7 +40,7 @@ public class TileCombinerComponent : MonoBehaviour {
     void Update(){
         // If either one of the detectors contains a tile AND the energy detector has an energy ball, do the combination
         // Energy is the *sorta* the go button, then, right? I'm kind of ok with that
-        for(int i = 0; i < (int) detectors.Count; ++i){
+        for(int i = 0; i < (int) Detector.Count; ++i){
             // Many to Many? One to One?
 
             // Old tiles are destroyed - ooh, ahh, effects
