@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TileType {
     Energy,
@@ -41,6 +42,11 @@ public class TileCombinerComponent : MonoBehaviour {
 
     private int levelIndex;
     public LevelData[] levels;
+
+    public GameObject resetButtonIcon;
+    public GameObject[] requirementIcons;
+    // This is 1-to-1 with the types above
+    public Sprite[] requirementSprites;
 
     private Combiner combiner;
     private Timer spawnCombinedResultTimer;
@@ -84,7 +90,7 @@ public class TileCombinerComponent : MonoBehaviour {
             };
         }
 
-        CombinerResult result = combiner.CombineTiles(
+        var result = combiner.CombineTiles(
             leftTiles,
             rightTiles,
             suppliedEnergy
@@ -188,6 +194,17 @@ public class TileCombinerComponent : MonoBehaviour {
                 ),
                 Quaternion.Euler(-90.0f, 0.0f, 0.0f)
             );
+        }
+
+        TileType[] reqs = levels[levelIndex].tilesToComplete;
+        for(int i = 0; i < requirementIcons.Length; ++i){
+            if(i < reqs.Length){
+                requirementIcons[i].GetComponent<Image>().enabled = true;
+                requirementIcons[i].GetComponent<Image>().sprite = requirementSprites[(int) reqs[i]];
+            } else {
+                requirementIcons[i].GetComponent<Image>().enabled = false;
+
+            }
         }
     }
 }

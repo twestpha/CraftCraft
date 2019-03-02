@@ -9,6 +9,7 @@ public class TileData : ScriptableObject {
     public GameObject winEffectPrefab;
 
     public AudioClip collisionSound;
+    public AudioClip destructionSound;
 }
 
 public class TileComponent : MonoBehaviour {
@@ -34,6 +35,13 @@ public class TileComponent : MonoBehaviour {
             GameObject spawnedfx = GameObject.Instantiate(data.collisionEffectsPrefab);
             spawnedfx.transform.position = spawnPosition;
         }
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.volume = coll.impulse.magnitude * 3.0f;
+        source.Stop();
+        source.clip = data.collisionSound;
+        source.pitch = 0.6f + (Random.value * 0.8f);
+        source.Play();
     }
 
     // Start the combine effect and a timer to destroy
