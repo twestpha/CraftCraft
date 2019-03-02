@@ -25,6 +25,7 @@ public class Combiner {
         // Check tiles against known recipes
         foreach (var recipe in recipes) {
             if (recipe.IngredientsMatch(left, right, energy)) {
+                Debug.Log("matched recipe: " + recipe);
                 return new CombinerResult{
                     Success = true,
                     LeftoverEnergy = energy - recipe.energyRequired,

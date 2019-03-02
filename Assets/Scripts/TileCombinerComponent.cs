@@ -25,14 +25,6 @@ public enum Detector {
     Count,
 }
 
-[CreateAssetMenu(fileName = "leveldata", menuName = "Level Data", order = 2)]
-public class LevelData : ScriptableObject {
-    public TileType[] tilesToSpawn;
-    public TileType[] tilesToComplete;
-}
-
-
-
 public class TileCombinerComponent : MonoBehaviour {
     // CHRIS: This is where we'll put the logic for how to combine tiles
     // We'll have triggers for which two tiles (more than two?) are in the correct slots
@@ -43,18 +35,18 @@ public class TileCombinerComponent : MonoBehaviour {
 
     public GameObject[] detectors;
 
-    public Vector3 newTileSpawnPoint;
+    public Vector3[] tileSpawnBox;
 
     public Recipe[] recipes;
-
-    private Combiner combiner;
 
     private int levelIndex;
     public LevelData[] levels;
 
+    private Combiner combiner;
+
     void Start(){
         levelIndex = 0;
-        // setup first level?
+        SetupCurrentLevel();
 
         if(tilePrefabs.Length != (int) TileType.Count){ Debug.LogError("TilePrefabs is wrong length"); }
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
@@ -103,7 +95,15 @@ public class TileCombinerComponent : MonoBehaviour {
             tilesToSpawn.AddRange(result.CreatedTiles);
 
             foreach(var t in tilesToSpawn) {
-                Instantiate(tilePrefabs[(int)t], newTileSpawnPoint, Quaternion.identity);
+                Instantiate(
+                    tilePrefabs[(int)t],
+                    new Vector3(
+                        Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).x,
+                        2.4f,
+                        Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).z
+                    ),
+                    Quaternion.Euler(-90.0f, 0.0f, 0.0f)
+                );
             }
         }
 
@@ -112,5 +112,22 @@ public class TileCombinerComponent : MonoBehaviour {
         // We should probably have a list of "starting tiles", "starting energy", and "requirements", and an index into that table representing the "level" we're on
         // Then on success, play effects and increment that index, then set up the next level
     }
-}
 
+    void SetupCurrentLevel(){
+        if(levels == null || levels.Length == 0 || levels[levelIndex] == null){ return; } // what the fuck?
+
+        TileType[] toSpawn = levels[levelIndex].tilesToSpawn;
+
+        for(int i = 0; i < toSpawn.Length; ++i){
+            Instantiate(
+                tilePrefabs[(int) toSpawn[i]],
+                new Vector3(
+                    Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).x,
+                    1.0f + (3.0f * Random.value),
+                    Vector3.Lerp(tileSpawnBox[0], tileSpawnBox[1], Random.value).z
+                ),
+                Quaternion.Euler(-90.0f, 0.0f, 0.0f)
+            );
+        }
+    }
+}
