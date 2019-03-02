@@ -15,20 +15,20 @@ public class TileComponent : MonoBehaviour {
     public TileType type;
     public TileData data;
 
-    private Timer soundCooldownTimer;
-
 	void Start(){
-        soundCooldownTimer = new Timer(0.5f);
+
 	}
 
 	void Update(){
 
 	}
 
-    // On Collision, play sound and make effects poof!
-    // Then put the effects timer on cooldown so we don't spam fx
     void OnCollisionEnter(Collision coll){
-        // soundCooldownTimer
+        if(coll.impulse.magnitude / Time.deltaTime > 2.0f){
+            Vector3 spawnPosition = Vector3.Lerp(transform.position, coll.GetContact(0).point, 0.5f);
+            GameObject spawnedfx = GameObject.Instantiate(data.collisionEffectsPrefab);
+            spawnedfx.transform.position = spawnPosition;
+        }
     }
 
     public void DestroyTile(){
