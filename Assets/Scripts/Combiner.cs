@@ -5,58 +5,14 @@ using UnityEngine;
 public struct CombinerResult {
     public bool Success;
     public int LeftoverEnergy;
-    public List<TileType> CreatedTiles;
+    public TileType[] CreatedTiles;
 }
 
 public class Combiner {
-    // Recipe declarations (is there a way to do this from a file instead of
-    // hard-coded?)
-    public Recipe[] recipes = new Recipe[]{
-        // 1 circle + 1 square + 1 energy = 1 rounded square
-        new Recipe{
-            aTiles = new Dictionary<TileType, int>{
-                {TileType.Circle, 1},
-            },
-            bTiles = new Dictionary<TileType, int>{
-                {TileType.Square, 1},
-            },
-            produces = new List<TileType>{TileType.RoundedSquare},
-            energyRequired = 1,
-        },
-        new Recipe{
-            aTiles = new Dictionary<TileType, int>{
-                {TileType.Square, 1},
-            },
-            bTiles = new Dictionary<TileType, int>{
-                {TileType.Square, 1},
-            },
-            produces = new List<TileType>{TileType.Circle},
-            energyRequired = 1,
-        },
-        new Recipe{
-            aTiles = new Dictionary<TileType, int>{
-                {TileType.Square, 1},
-                {TileType.RoundedSquare, 1},
-            },
-            bTiles = new Dictionary<TileType, int>{
-                {TileType.Circle, 1},
-            },
-            produces = new List<TileType>{TileType.Square, TileType.Square, TileType.Square},
-            energyRequired = 2,
-        },
-        new Recipe{
-            aTiles = new Dictionary<TileType, int>{
-                {TileType.Square, 1},
-            },
-            bTiles = new Dictionary<TileType, int>{
-                {TileType.Triangle, 1},
-                {TileType.Square, 1},
-                {TileType.Circle, 1},
-            },
-            produces = new List<TileType>{TileType.Square, TileType.Square, TileType.Square},
-            energyRequired = 1,
-        }
-    };
+    private Recipe[] recipes;
+    public Combiner(Recipe[] recipes) {
+        this.recipes = recipes;
+    }
 
     public CombinerResult CombineTiles(List<TileType> left, List<TileType> right, int energy){
         // Fail early if there are no tiles on one of the sides
@@ -83,29 +39,44 @@ public class Combiner {
     }
 }
 
-public class Recipe {
-    public int energyRequired;
-    public Dictionary<TileType, int> aTiles;
-    public Dictionary<TileType, int> bTiles;
-    public List<TileType> produces;
+[CreateAssetMenu(fileName = "recipe", menuName = "Recipe Data", order = 3)]
+public class Recipe : ScriptableObject {
+    public TileType[] aTiles;
+    public TileType[] bTiles;
+    public int energyRequired = 1;
+    public TileType[] produces;
+
+    private Dictionary<TileType, int> aTilesDict;
+    private Dictionary<TileType, int> bTilesDict;
 
     public bool IngredientsMatch(List<TileType> leftTiles, List<TileType> rightTiles, int energy) {
+        // TODO Is there a way to initialize these on level load instead of lazy initing?
+        lazyInitTilesDicts();
+
         if (energy < energyRequired) {
             return false;
         }
 
-        var leftDict = buildIngredientDictFromList(leftTiles);
-        var rightDict = buildIngredientDictFromList(rightTiles);
-
+        var leftDict = buildIngredientDictFromArray(leftTiles.ToArray());
+        var rightDict = buildIngredientDictFromArray(rightTiles.ToArray());
 
         // Check if the ingredients match in either order
-        bool match = (dictsAreSame(aTiles, leftDict) && dictsAreSame(bTiles, rightDict));
-        match = match || (dictsAreSame(bTiles, leftDict) && dictsAreSame(aTiles, rightDict));
+        bool match = (dictsAreSame(aTilesDict, leftDict) && dictsAreSame(bTilesDict, rightDict));
+        match = match || (dictsAreSame(bTilesDict, leftDict) && dictsAreSame(aTilesDict, rightDict));
 
         return match;
     }
 
-    private Dictionary<TileType, int> buildIngredientDictFromList(List<TileType> ingredients) {
+    private void lazyInitTilesDicts() {
+        if (aTilesDict == null) {
+            aTilesDict = buildIngredientDictFromArray(aTiles);
+        }
+        if (bTilesDict == null) {
+            bTilesDict = buildIngredientDictFromArray(bTiles);
+        }
+    }
+
+    private Dictionary<TileType, int> buildIngredientDictFromArray(TileType[] ingredients) {
         var dict = new Dictionary<TileType, int>();
         foreach(var ingredient in ingredients) {
             if (dict.ContainsKey(ingredient)) {

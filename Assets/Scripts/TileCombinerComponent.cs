@@ -45,6 +45,10 @@ public class TileCombinerComponent : MonoBehaviour {
 
     public Vector3 newTileSpawnPoint;
 
+    public Recipe[] recipes;
+
+    private Combiner combiner;
+
     private int levelIndex;
     public LevelData[] levels;
 
@@ -54,6 +58,8 @@ public class TileCombinerComponent : MonoBehaviour {
 
         if(tilePrefabs.Length != (int) TileType.Count){ Debug.LogError("TilePrefabs is wrong length"); }
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
+
+        combiner = new Combiner(recipes);
     }
 
     void Update(){
@@ -77,7 +83,7 @@ public class TileCombinerComponent : MonoBehaviour {
             };
         }
 
-        CombinerResult result = new Combiner().CombineTiles(
+        CombinerResult result = combiner.CombineTiles(
             leftTiles,
             rightTiles,
             suppliedEnergy
