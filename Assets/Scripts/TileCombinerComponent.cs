@@ -8,6 +8,9 @@ public enum TileType {
     Square,
     Circle,
     RoundedSquare,
+    Triangle,
+    Donut,
+    Star,
 
     Count,
 
