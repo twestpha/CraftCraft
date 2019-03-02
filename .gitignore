@@ -49,3 +49,6 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Non-unity stuff
+.vscode
