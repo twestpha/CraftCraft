@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   winEffectPrefab: {fileID: 3830669954285248824, guid: f9c44db73ef0d224681d214d3d655284,
     type: 3}
-  collisionSound: {fileID: 8300000, guid: 26db800a344095b478f5a969a347a478, type: 3}
+  collisionSound: {fileID: 8300000, guid: 889b7f552391a734a93b9e3fa7265ce4, type: 3}

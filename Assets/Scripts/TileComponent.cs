@@ -9,6 +9,7 @@ public class TileData : ScriptableObject {
     public GameObject winEffectPrefab;
 
     public AudioClip collisionSound;
+    public AudioClip destructionSound;
 }
 
 public class TileComponent : MonoBehaviour {
