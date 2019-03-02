@@ -12,6 +12,7 @@ public class Combiner {
     // Recipe declarations (is there a way to do this from a file instead of
     // hard-coded?)
     public Recipe[] recipes = new Recipe[]{
+        // 1 circle + 1 square + 1 energy = 1 rounded square
         new Recipe{
             aTiles = new Dictionary<TileType, int>{
                 {TileType.Circle, 1},
@@ -43,6 +44,18 @@ public class Combiner {
             produces = new List<TileType>{TileType.Square, TileType.Square, TileType.Square},
             energyRequired = 2,
         },
+        new Recipe{
+            aTiles = new Dictionary<TileType, int>{
+                {TileType.Square, 1},
+            },
+            bTiles = new Dictionary<TileType, int>{
+                {TileType.Triangle, 1},
+                {TileType.Square, 1},
+                {TileType.Circle, 1},
+            },
+            produces = new List<TileType>{TileType.Square, TileType.Square, TileType.Square},
+            energyRequired = 1,
+        }
     };
 
     public CombinerResult CombineTiles(List<TileType> left, List<TileType> right, int energy){
