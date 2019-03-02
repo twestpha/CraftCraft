@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TileType {
+    Energy,
+
     Square,
     Circle,
     RoundedSquare,
-
-    Energy,
 
     Count,
 
