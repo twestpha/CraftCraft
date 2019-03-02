@@ -32,7 +32,7 @@ public class DetectorComponent : MonoBehaviour {
         for (int i = 0; i < tiles.Length; i++) {
             if(tiles[i]){
                 TileComponent tile = tiles[i].GetComponent<TileComponent>();
-                if(tile){ tile.DestroyTile(false); }
+                if(tile){ tile.CombineAndDestroyTile(); }
             }
 
             tiles[i] = null;

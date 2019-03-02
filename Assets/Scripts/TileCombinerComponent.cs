@@ -49,12 +49,14 @@ public class TileCombinerComponent : MonoBehaviour {
     public Sprite[] requirementSprites;
 
     private Combiner combiner;
+    private Timer spawnCombinedResultTimer;
     private Timer winCheckTimer;
     private Timer setupNewLevelTimer;
-    private Timer recipeCheckTimer;
+    private float secondsUntilSpawnCombined = 1.0f;
     private float secondsBeforeWinCheck = 3.5f;
     private float newLevelDelay = 0.5f;
-    private float recipeCheckDelay = 0.6f;
+
+    private List<TileType> tilesToSpawn;
 
     void Start(){
         levelIndex = 0;
@@ -64,60 +66,54 @@ public class TileCombinerComponent : MonoBehaviour {
         if(detectors.Length != (int) Detector.Count){ Debug.LogError("Detectors is wrong length"); }
 
         combiner = new Combiner(recipes);
-
-        // So the recipe doesn't feel so "sudden" after it's submitted
-        recipeCheckTimer = new Timer(recipeCheckDelay);
-        recipeCheckTimer.Start();
+        tilesToSpawn = new List<TileType>();
     }
 
     void Update(){
         // Build state of the board
+        List<TileType> leftTiles = new List<TileType>();
+        List<TileType> rightTiles = new List<TileType>();
+        int suppliedEnergy = 0;
 
-        CombinerResult result = new CombinerResult();
-        result.Success = false;
-
-        if(recipeCheckTimer.Finished()){
-            recipeCheckTimer.Start();
-
-            List<TileType> leftTiles = new List<TileType>();
-            List<TileType> rightTiles = new List<TileType>();
-            int suppliedEnergy = 0;
-
-            for(int i = 0; i < (int) Detector.Count; ++i){
-                DetectorComponent d = detectors[i].GetComponent<DetectorComponent>();
-                switch ((Detector)i) {
-                case Detector.Center:
-                    suppliedEnergy = d.getNumEnergyTiles();
-                    break;
-                case Detector.Left:
-                    leftTiles = d.getAllValidTiles();
-                    break;
-                case Detector.Right:
-                    rightTiles = d.getAllValidTiles();
-                    break;
-                };
-            }
-
-            result = combiner.CombineTiles(
-                leftTiles,
-                rightTiles,
-                suppliedEnergy
-            );
+        for(int i = 0; i < (int) Detector.Count; ++i){
+            DetectorComponent d = detectors[i].GetComponent<DetectorComponent>();
+            switch ((Detector)i) {
+            case Detector.Center:
+                suppliedEnergy = d.getNumEnergyTiles();
+                break;
+            case Detector.Left:
+                leftTiles = d.getAllValidTiles();
+                break;
+            case Detector.Right:
+                rightTiles = d.getAllValidTiles();
+                break;
+            };
         }
 
+        var result = combiner.CombineTiles(
+            leftTiles,
+            rightTiles,
+            suppliedEnergy
+        );
+
         if (result.Success) {
+            // Hover the energy tiles, shake the pieces
             // Old tiles are destroyed - ooh, ahh, effects
             for(int i = 0; i < (int) Detector.Count; ++i){
                 detectors[i].GetComponent<DetectorComponent>().DestroyAllTiles();
             }
 
             // Spawn new thangs
-            var tilesToSpawn = new List<TileType>();
             for (int i = 0; i < result.LeftoverEnergy; i++) {
                 tilesToSpawn.Add(TileType.Energy);
             }
             tilesToSpawn.AddRange(result.CreatedTiles);
 
+            spawnCombinedResultTimer = new Timer(secondsUntilSpawnCombined);
+            spawnCombinedResultTimer.Start();
+        }
+
+        if (spawnCombinedResultTimer != null && spawnCombinedResultTimer.Finished()) {
             foreach(var t in tilesToSpawn) {
                 Instantiate(
                     tilePrefabs[(int)t],
@@ -129,10 +125,13 @@ public class TileCombinerComponent : MonoBehaviour {
                     Quaternion.Euler(-90.0f, 0.0f, 0.0f)
                 );
             }
+            tilesToSpawn.Clear();
 
             // start winCheckTimer
             winCheckTimer = new Timer(secondsBeforeWinCheck);
             winCheckTimer.Start();
+
+            spawnCombinedResultTimer = null;
         }
 
         // If it's time, check for win condition

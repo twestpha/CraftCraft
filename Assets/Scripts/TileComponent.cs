@@ -17,12 +17,16 @@ public class TileComponent : MonoBehaviour {
     public TileType type;
     public TileData data;
 
-	void Start(){
+    private Timer destroyTimer;
+    private float secondsToDestroy = 1.0f;
 
+	void Start(){
 	}
 
 	void Update(){
-
+        if (destroyTimer != null && destroyTimer.Finished()) {
+            DestroyTile(false);
+        }
 	}
 
     void OnCollisionEnter(Collision coll){
@@ -40,6 +44,14 @@ public class TileComponent : MonoBehaviour {
         source.Play();
     }
 
+    // Start the combine effect and a timer to destroy
+    public void CombineAndDestroyTile(){
+        SendMessage("Combine");
+        destroyTimer = new Timer(secondsToDestroy);
+        destroyTimer.Start();
+    }
+
+    // actually destroy the tile
     public void DestroyTile(bool didwin){
         GameObject spawnedfx = GameObject.Instantiate(didwin ? data.winEffectPrefab : data.destructionPrefab);
         spawnedfx.transform.position = transform.position;
