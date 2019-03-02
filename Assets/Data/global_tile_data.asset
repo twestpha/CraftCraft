@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileData
   collisionEffectsPrefab: {fileID: 1858880117662728, guid: 053595da583d7ec4a8f79a437c9a6a0d,
     type: 3}
-  destructionPrefab: {fileID: 0}
+  destructionPrefab: {fileID: 5526643553161877192, guid: f98c16f7cf080e041a012712cd9b81ed,
+    type: 3}
   collisionSound: {fileID: 0}
