@@ -43,6 +43,8 @@ public class TileCombinerComponent : MonoBehaviour {
     public LevelData[] levels;
 
     private Combiner combiner;
+    private Timer winCheckTimer;
+    private float secondsBeforeWinCheck = 1.5f;
 
     void Start(){
         levelIndex = 0;
@@ -105,16 +107,53 @@ public class TileCombinerComponent : MonoBehaviour {
                     Quaternion.Euler(-90.0f, 0.0f, 0.0f)
                 );
             }
+
+            // start winCheckTimer
+            winCheckTimer = new Timer(secondsBeforeWinCheck);
+            winCheckTimer.Start();
         }
 
-        // TODO Check for win condition
+        // If it's time, check for win condition
+        if (winCheckTimer != null && winCheckTimer.Finished()) {
+            if (DidWin()) {
+                Debug.Log("You won!");
+                TearDownCurrentLevel();
+                levelIndex++;
+                SetupCurrentLevel();
+            } else {
+                Debug.Log("Did not win yet");
+            }
+            winCheckTimer = null;
+        }
+    }
 
-        // We should probably have a list of "starting tiles", "starting energy", and "requirements", and an index into that table representing the "level" we're on
-        // Then on success, play effects and increment that index, then set up the next level
+    bool DidWin() {
+        var tileComps = Object.FindObjectsOfType<TileComponent>();
+        var tiles = new TileType[tileComps.Length];
+        for (int i = 0; i < tiles.Length; i++) {
+            tiles[i] = tileComps[i].type;
+        }
+
+        return TilesComparer.TilesMatch(tiles, levels[levelIndex].tilesToComplete);
+    }
+
+    void TearDownCurrentLevel() {
+        if(levels == null || levels.Length == 0 || levels[levelIndex] == null){
+            Debug.Log("no level to destroy, how did you even get here?");
+            return;
+        } // what the actual fuck?
+
+        var tiles = Object.FindObjectsOfType<TileComponent>();
+        foreach (var t in tiles) {
+            Destroy(t.gameObject);
+        }
     }
 
     void SetupCurrentLevel(){
-        if(levels == null || levels.Length == 0 || levels[levelIndex] == null){ return; } // what the fuck?
+        if(levels == null || levels.Length == 0 || levels[levelIndex] == null){
+            Debug.Log("no level to load :(");
+            return;
+        } // what the fuck?
 
         TileType[] toSpawn = levels[levelIndex].tilesToSpawn;
 
@@ -131,3 +170,5 @@ public class TileCombinerComponent : MonoBehaviour {
         }
     }
 }
+
+
