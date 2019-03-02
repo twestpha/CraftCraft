@@ -1372,6 +1372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 819659253}
   - component: {fileID: 819659252}
+  - component: {fileID: 819659254}
   m_Layer: 0
   m_Name: Right Detector
   m_TagString: Untagged
@@ -1404,6 +1405,18 @@ Transform:
   m_Father: {fileID: 155582138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &819659254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 819659251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ecf106db09b1f46864bf053eaa8e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles: []
 --- !u!1 &833813102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833813104}
   - component: {fileID: 833813103}
+  - component: {fileID: 833813105}
   m_Layer: 0
   m_Name: Center Detector
   m_TagString: Untagged
@@ -1445,6 +1459,18 @@ Transform:
   m_Father: {fileID: 155582138}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &833813105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 833813102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ecf106db09b1f46864bf053eaa8e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles: []
 --- !u!1 &1070730853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,6 +1994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1869655024}
   - component: {fileID: 1869655023}
+  - component: {fileID: 1869655025}
   m_Layer: 0
   m_Name: Left Detector
   m_TagString: Untagged
@@ -2000,6 +2027,18 @@ Transform:
   m_Father: {fileID: 155582138}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869655025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1869655022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ecf106db09b1f46864bf053eaa8e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles: []
 --- !u!1 &1927135410
 GameObject:
   m_ObjectHideFlags: 0

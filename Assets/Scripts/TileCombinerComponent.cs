@@ -39,10 +39,13 @@ public class TileCombinerComponent : MonoBehaviour {
 
     void Update(){
         // If either one of the detectors contains a tile AND the energy detector has an energy ball, do the combination
-        // Energy is the go button, then, right? I'm kind of ok with that
+        // Energy is the *sorta* the go button, then, right? I'm kind of ok with that
+        for(int i = 0; i < (int) detectors.Count; ++i){
+            // Many to Many? One to One?
 
-        // Old tiles are destroyed - ooh, ahh, effects
-        // New tile is instantiated according to CombineTiles, and dropped into the scene
+            // Old tiles are destroyed - ooh, ahh, effects
+            // New tile is instantiated according to CombineTiles, and dropped into the scene
+        }
 
         // If all tiles in the scene match the correct types for "success", then we proceed
         // We should probably have a list of "starting tiles", "starting energy", and "requirements", and an index into that table representing the "level" we're on
