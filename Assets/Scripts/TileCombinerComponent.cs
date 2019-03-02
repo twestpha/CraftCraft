@@ -44,7 +44,9 @@ public class TileCombinerComponent : MonoBehaviour {
 
     private Combiner combiner;
     private Timer winCheckTimer;
-    private float secondsBeforeWinCheck = 1.5f;
+    private Timer setupNewLevelTimer;
+    private float secondsBeforeWinCheck = 3.5f;
+    private float newLevelDelay = 0.5f;
 
     void Start(){
         levelIndex = 0;
@@ -119,11 +121,17 @@ public class TileCombinerComponent : MonoBehaviour {
                 Debug.Log("You won!");
                 TearDownCurrentLevel();
                 levelIndex++;
-                SetupCurrentLevel();
+                setupNewLevelTimer = new Timer(newLevelDelay);
+                setupNewLevelTimer.Start();
             } else {
                 Debug.Log("Did not win yet");
             }
             winCheckTimer = null;
+        }
+
+        if(setupNewLevelTimer != null && setupNewLevelTimer.Finished()){
+            SetupCurrentLevel();
+            setupNewLevelTimer = null;
         }
     }
 
@@ -145,7 +153,7 @@ public class TileCombinerComponent : MonoBehaviour {
 
         var tiles = Object.FindObjectsOfType<TileComponent>();
         foreach (var t in tiles) {
-            Destroy(t.gameObject);
+            t.DestroyTile(true);
         }
     }
 
@@ -170,5 +178,3 @@ public class TileCombinerComponent : MonoBehaviour {
         }
     }
 }
-
-

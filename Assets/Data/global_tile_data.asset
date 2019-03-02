@@ -16,4 +16,6 @@ MonoBehaviour:
     type: 3}
   destructionPrefab: {fileID: 5526643553161877192, guid: f98c16f7cf080e041a012712cd9b81ed,
     type: 3}
+  winEffectPrefab: {fileID: 3830669954285248824, guid: f9c44db73ef0d224681d214d3d655284,
+    type: 3}
   collisionSound: {fileID: 0}

@@ -9,6 +9,8 @@ public class PickupComponent : MonoBehaviour {
     public const float TILE_RAISE_HEIGHT = 0.7f;
     public const float TILE_SEEK_TIME = 0.15f;
 
+    public GameObject dustEffectsPrefab;
+
     private Plane groundplane;
     private GameObject heldTile;
 
@@ -32,6 +34,11 @@ public class PickupComponent : MonoBehaviour {
                 heldTile.GetComponent<Rigidbody>().isKinematic = true;
                 rotationTimer.Start();
                 originalRotation = heldTile.transform.rotation;
+            } else {
+                if(Physics.Raycast(mouseRay, out hit, MAX_RAYCAST_DISTANCE)){
+                    GameObject fx = GameObject.Instantiate(dustEffectsPrefab);
+                    fx.transform.position = mouseRay.GetPoint(hit.distance);
+                }
             }
         }
 

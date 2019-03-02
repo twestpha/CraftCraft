@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43706435, g: 0.48477095, b: 0.5650341, a: 1}
+  m_IndirectSpecularColor: {r: 0.43706462, g: 0.4847713, b: 0.56503445, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce8926a6f8f7f24891926a22e3ffc0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dustEffectsPrefab: {fileID: 1858880117662728, guid: 053595da583d7ec4a8f79a437c9a6a0d,
+    type: 3}
 --- !u!114 &155582140
 MonoBehaviour:
   m_ObjectHideFlags: 0

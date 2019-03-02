@@ -6,6 +6,7 @@ using UnityEngine;
 public class TileData : ScriptableObject {
     public GameObject collisionEffectsPrefab;
     public GameObject destructionPrefab;
+    public GameObject winEffectPrefab;
 
     public AudioClip collisionSound;
 }
@@ -31,8 +32,8 @@ public class TileComponent : MonoBehaviour {
         }
     }
 
-    public void DestroyTile(){
-        GameObject spawnedfx = GameObject.Instantiate(data.destructionPrefab);
+    public void DestroyTile(bool didwin){
+        GameObject spawnedfx = GameObject.Instantiate(didwin ? data.winEffectPrefab : data.destructionPrefab);
         spawnedfx.transform.position = transform.position;
 
         Destroy(gameObject);
