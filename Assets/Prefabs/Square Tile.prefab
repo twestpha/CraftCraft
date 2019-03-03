@@ -124,8 +124,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
+  collisionEffectsPrefab: {fileID: 1858880117662728, guid: 053595da583d7ec4a8f79a437c9a6a0d,
+    type: 3}
+  destructionPrefab: {fileID: 5526643553161877192, guid: f98c16f7cf080e041a012712cd9b81ed,
+    type: 3}
+  winEffectPrefab: {fileID: 3830669954285248824, guid: f9c44db73ef0d224681d214d3d655284,
+    type: 3}
   collisionSound: {fileID: 8300000, guid: 5159a0f1483e25241be410e94a6c8327, type: 3}
+  destructionSound: {fileID: 8300000, guid: 4b0128d1ddd54b448b10695c91a62079, type: 3}
+  successSound: {fileID: 8300000, guid: 23673afce157f104f88eecc0788f180f, type: 3}
   clickable: 0
 --- !u!114 &8872345881041546891
 MonoBehaviour:

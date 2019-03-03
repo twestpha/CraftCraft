@@ -159,7 +159,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608300938071570}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4665c638b1b97849aee1d3cd39cd693, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -194,8 +194,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
+  collisionEffectsPrefab: {fileID: 1858880117662728, guid: 053595da583d7ec4a8f79a437c9a6a0d,
+    type: 3}
+  destructionPrefab: {fileID: 5526643553161877192, guid: f98c16f7cf080e041a012712cd9b81ed,
+    type: 3}
+  winEffectPrefab: {fileID: 3830669954285248824, guid: f9c44db73ef0d224681d214d3d655284,
+    type: 3}
   collisionSound: {fileID: 8300000, guid: 889b7f552391a734a93b9e3fa7265ce4, type: 3}
+  destructionSound: {fileID: 8300000, guid: 4b0128d1ddd54b448b10695c91a62079, type: 3}
+  successSound: {fileID: 8300000, guid: 23673afce157f104f88eecc0788f180f, type: 3}
   clickable: 0
 --- !u!114 &3530014386131200831
 MonoBehaviour:
