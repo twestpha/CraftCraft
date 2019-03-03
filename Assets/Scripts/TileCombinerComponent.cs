@@ -48,13 +48,12 @@ public class TileCombinerComponent : MonoBehaviour {
     // This is 1-to-1 with the types above
     public Sprite[] requirementSprites;
 
-
     private Combiner combiner;
     private Timer spawnCombinedResultTimer;
     private Timer winCheckTimer;
     private Timer setupNewLevelTimer;
     private float secondsUntilSpawnCombined = 1.0f;
-    private float secondsBeforeWinCheck = 1.0f;
+    private float secondsBeforeWinCheck = 3.0f;
     private float newLevelDelay = 0.5f;
 
     private Timer resetLimiterTimer;
