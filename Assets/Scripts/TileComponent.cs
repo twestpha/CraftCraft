@@ -20,7 +20,10 @@ public class TileComponent : MonoBehaviour {
     private Timer destroyTimer;
     private float secondsToDestroy = 1.0f;
 
+    public bool clickable;
+
 	void Start(){
+        clickable = true;
 	}
 
 	void Update(){
@@ -46,6 +49,8 @@ public class TileComponent : MonoBehaviour {
 
     // Start the combine effect and a timer to destroy
     public void CombineAndDestroyTile(){
+        clickable = false;
+
         SendMessage("Combine");
         destroyTimer = new Timer(secondsToDestroy);
         destroyTimer.Start();

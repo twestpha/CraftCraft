@@ -29,11 +29,13 @@ public class PickupComponent : MonoBehaviour {
             RaycastHit hit;
 
             if(Physics.Raycast(mouseRay, out hit, MAX_RAYCAST_DISTANCE, TILE_COLLISION_MASK)){
-                heldTile = hit.collider.gameObject;
+                if(hit.collider.gameObject.GetComponent<TileComponent>().clickable){
+                    heldTile = hit.collider.gameObject;
 
-                heldTile.GetComponent<Rigidbody>().isKinematic = true;
-                rotationTimer.Start();
-                originalRotation = heldTile.transform.rotation;
+                    heldTile.GetComponent<Rigidbody>().isKinematic = true;
+                    rotationTimer.Start();
+                    originalRotation = heldTile.transform.rotation;
+                }
             } else {
                 if(Physics.Raycast(mouseRay, out hit, MAX_RAYCAST_DISTANCE)){
                     GameObject fx = GameObject.Instantiate(dustEffectsPrefab);
