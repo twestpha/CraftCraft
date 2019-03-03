@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e46bef836df1542b394c1538f916eca1, type: 3}
-  m_Name: star
+  m_Name: triangle (stars)
   m_EditorClassIdentifier: 
-  aTiles: 01000000
-  bTiles: 04000000
+  aTiles: 0600000006000000
+  bTiles: 06000000
   energyRequired: 1
-  produces: 06000000
+  produces: 04000000

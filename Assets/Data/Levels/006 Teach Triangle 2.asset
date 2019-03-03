@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dfaf24d772258f468cd8da2802739d9, type: 3}
-  m_Name: Tutorial Level
+  m_Name: 006 Teach Triangle 2
   m_EditorClassIdentifier: 
-  tilesToSpawn: 010000000100000000000000
-  tilesToComplete: 02000000
+  tilesToSpawn: 02000000020000000200000000000000
+  tilesToComplete: 04000000

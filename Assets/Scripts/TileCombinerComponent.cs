@@ -40,7 +40,7 @@ public class TileCombinerComponent : MonoBehaviour {
 
     public Recipe[] recipes;
 
-    private int levelIndex;
+    public int levelIndex;
     public LevelData[] levels;
 
     public GameObject resetButtonIcon;
@@ -62,7 +62,6 @@ public class TileCombinerComponent : MonoBehaviour {
     private List<TileType> tilesToSpawn;
 
     void Start(){
-        levelIndex = 0;
         SetupCurrentLevel();
 
         if(tilePrefabs.Length != (int) TileType.Count){ Debug.LogError("TilePrefabs is wrong length"); }

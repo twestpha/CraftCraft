@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: donut
   m_EditorClassIdentifier: 
   aTiles: 02000000
-  bTiles: 04000000
+  bTiles: 03000000
   energyRequired: 1
   produces: 05000000
