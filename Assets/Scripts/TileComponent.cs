@@ -49,6 +49,13 @@ public class TileComponent : MonoBehaviour {
         SendMessage("Combine");
         destroyTimer = new Timer(secondsToDestroy);
         destroyTimer.Start();
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.volume = 0.8f;
+        source.Stop();
+        source.clip = data.destructionSound;
+        source.pitch = 1.0f;
+        source.Play();
     }
 
     // actually destroy the tile
