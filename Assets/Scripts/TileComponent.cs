@@ -10,6 +10,7 @@ public class TileData : ScriptableObject {
 
     public AudioClip collisionSound;
     public AudioClip destructionSound;
+    public AudioClip successSound;
 }
 
 public class TileComponent : MonoBehaviour {
@@ -20,6 +21,9 @@ public class TileComponent : MonoBehaviour {
     private Timer destroyTimer;
     private float secondsToDestroy = 1.0f;
 
+    private Timer soundTimer;
+
+
     public bool clickable;
 
 	void Start(){
@@ -29,6 +33,10 @@ public class TileComponent : MonoBehaviour {
 	void Update(){
         if (destroyTimer != null && destroyTimer.Finished()) {
             DestroyTile(false);
+        }
+
+        if(soundTimer != null && soundTimer.Finished()){
+            Destroy(gameObject);
         }
 	}
 
@@ -68,6 +76,20 @@ public class TileComponent : MonoBehaviour {
         GameObject spawnedfx = GameObject.Instantiate(didwin ? data.winEffectPrefab : data.destructionPrefab);
         spawnedfx.transform.position = transform.position;
 
-        Destroy(gameObject);
+        if(didwin){
+            AudioSource source = GetComponent<AudioSource>();
+            source.volume = 0.8f;
+            source.Stop();
+            source.clip = data.successSound;
+            source.pitch = 1.0f;
+            source.Play();
+
+            GetComponent<MeshRenderer>().enabled = false;
+
+            soundTimer = new Timer(secondsToDestroy);
+            soundTimer.Start();
+        } else {
+            Destroy(gameObject);
+        }
     }
 }
