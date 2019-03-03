@@ -48,13 +48,17 @@ public class TileCombinerComponent : MonoBehaviour {
     // This is 1-to-1 with the types above
     public Sprite[] requirementSprites;
 
+
     private Combiner combiner;
     private Timer spawnCombinedResultTimer;
     private Timer winCheckTimer;
     private Timer setupNewLevelTimer;
     private float secondsUntilSpawnCombined = 1.0f;
-    private float secondsBeforeWinCheck = 3.5f;
+    private float secondsBeforeWinCheck = 1.0f;
     private float newLevelDelay = 0.5f;
+
+    private Timer resetLimiterTimer;
+    private float secondsBetweenResets = 0.8f;
 
     private List<TileType> tilesToSpawn;
 
@@ -138,7 +142,8 @@ public class TileCombinerComponent : MonoBehaviour {
         if (winCheckTimer != null && winCheckTimer.Finished()) {
             if (DidWin()) {
                 Debug.Log("You won!");
-                TearDownCurrentLevel();
+                // spawn particles, did win
+                TearDownCurrentLevel(true, true);
                 levelIndex++;
                 setupNewLevelTimer = new Timer(newLevelDelay);
                 setupNewLevelTimer.Start();
@@ -164,7 +169,23 @@ public class TileCombinerComponent : MonoBehaviour {
         return TilesComparer.TilesMatch(tiles, levels[levelIndex].tilesToComplete);
     }
 
-    void TearDownCurrentLevel() {
+    public void ResetCurrentLevel() {
+        // Do not allow reset while:
+        //  * waiting for tiles to combine
+        //  * waiting for win condition checked
+        //  * waiting to setup next level
+        if (spawnCombinedResultTimer != null || winCheckTimer != null || setupNewLevelTimer != null) {
+            return;
+        }
+        if (resetLimiterTimer.Elapsed() >= secondsBetweenResets) {
+            // no particles, didn't win
+            TearDownCurrentLevel(false, false);
+            SetupCurrentLevel();
+        }
+
+    }
+
+    void TearDownCurrentLevel(bool spawnParticles, bool didWin) {
         if(levels == null || levels.Length == 0 || levels[levelIndex] == null){
             Debug.Log("no level to destroy, how did you even get here?");
             return;
@@ -172,11 +193,14 @@ public class TileCombinerComponent : MonoBehaviour {
 
         var tiles = Object.FindObjectsOfType<TileComponent>();
         foreach (var t in tiles) {
-            t.DestroyTile(true);
+            t.DestroyTile(spawnParticles, didWin);
         }
     }
 
     void SetupCurrentLevel(){
+        resetLimiterTimer = new Timer();
+        resetLimiterTimer.Start();
+
         if(levels == null || levels.Length == 0 || levels[levelIndex] == null){
             Debug.Log("no level to load :(");
             return;

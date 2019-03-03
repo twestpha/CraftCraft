@@ -33,7 +33,8 @@ public class TileComponent : MonoBehaviour {
 
 	void Update(){
         if (destroyTimer != null && destroyTimer.Finished()) {
-            DestroyTile(false);
+            // enable particles, but not win particles
+            DestroyTile(true, false);
         }
 
         if(soundTimer != null && soundTimer.Finished()){
@@ -74,9 +75,11 @@ public class TileComponent : MonoBehaviour {
     }
 
     // actually destroy the tile
-    public void DestroyTile(bool didwin){
-        GameObject spawnedfx = GameObject.Instantiate(didwin ? data.winEffectPrefab : data.destructionPrefab);
-        spawnedfx.transform.position = transform.position;
+    public void DestroyTile(bool spawnParticles, bool didwin){
+        if (spawnParticles) {
+            GameObject spawnedfx = GameObject.Instantiate(didwin ? data.winEffectPrefab : data.destructionPrefab);
+            spawnedfx.transform.position = transform.position;
+        }
 
         if(didwin){
             AudioSource source = GetComponent<AudioSource>();
