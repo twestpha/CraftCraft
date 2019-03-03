@@ -125,6 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   data: {fileID: 11400000, guid: 830bf23380f7a0048b2d56b8367bcb51, type: 2}
+  collisionSound: {fileID: 8300000, guid: 5159a0f1483e25241be410e94a6c8327, type: 3}
+  clickable: 0
 --- !u!114 &8872345881041546891
 MonoBehaviour:
   m_ObjectHideFlags: 0

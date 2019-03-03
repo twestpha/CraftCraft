@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfaf24d772258f468cd8da2802739d9, type: 3}
   m_Name: Tutorial Level 2
   m_EditorClassIdentifier: 
-  tilesToSpawn: 0100000001000000010000000000000000000000
+  tilesToSpawn: 010000000200000003000000040000000600000005000000
   tilesToComplete: 03000000
