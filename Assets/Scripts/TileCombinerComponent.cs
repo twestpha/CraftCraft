@@ -53,7 +53,7 @@ public class TileCombinerComponent : MonoBehaviour {
     private Timer winCheckTimer;
     private Timer setupNewLevelTimer;
     private float secondsUntilSpawnCombined = 1.0f;
-    private float secondsBeforeWinCheck = 3.0f;
+    private float secondsBeforeWinCheck = 1.3f;
     private float newLevelDelay = 0.5f;
 
     private Timer resetLimiterTimer;
